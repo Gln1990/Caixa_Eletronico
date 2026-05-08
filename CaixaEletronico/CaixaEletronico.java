@@ -20,20 +20,15 @@ public class CaixaEletronico implements ICaixaEletronico{
             {2, 0}
         };
     }
-    
-    
+
     public int[][] getEstoqueCedulas() {
         return estoqueCedulas;
     }
-
-    
-    
+  
     public void setEstoqueCedulas(int[][] estoqueCedulas) {
         this.estoqueCedulas = estoqueCedulas;
     }
-    
-    
-    
+ 
 	public String pegaRelatorioCedulas() {
 		StringBuilder relatorio = new StringBuilder("Relatório de Cédulas:\n");
 	    for (int[] par : estoqueCedulas) {
@@ -58,21 +53,16 @@ public class CaixaEletronico implements ICaixaEletronico{
 		JOptionPane.showMessageDialog(null, String.format("Valor total no caixa: R$ %,.2f", (double)soma));
 		return resposta;
 		}
-		
-		
-		
-		
+
 		public String reposicaoCedulas(Integer cedula, Integer quantidade) {
 		int i = 0;
 		String resposta = "Reposição concluída! Novo estoque de R$" + cedula + ": " + estoqueCedulas[i][1];
 		
 		for(i = 0; i < estoqueCedulas.length; i++) {
 			// Verifica se a nota na linha i (posição 0) é a nota que queremos repor
-	        if (estoqueCedulas[i][0] == cedula) {
-	            
+	        if (estoqueCedulas[i][0] == cedula) {  
 	            // Adiciona a nova quantidade ao estoque existente (posição 1)
 	            estoqueCedulas[i][1] += quantidade; 
-	            
 	            return "Reposição concluída! Novo estoque de R$" + cedula + ": " + estoqueCedulas[i][1];
 	        }
 		}
@@ -80,8 +70,7 @@ public class CaixaEletronico implements ICaixaEletronico{
 		//logica de fazer a reposicao de cedulas e criar uma mensagem //(resposta)ao usuario
 		return resposta;
 		}
-		
-		
+
 		private int calcularSomaTotal() {
 		    int soma = 0;
 		    for(int i = 0; i < estoqueCedulas.length; i++) {
@@ -89,9 +78,7 @@ public class CaixaEletronico implements ICaixaEletronico{
 		    }
 		    return soma;
 		}
-		
-		
-		
+
 		 // Variável acumuladora
 		public String sacar(Integer valor) {
 			int valorDisponivel = calcularSomaTotal(); 
@@ -101,10 +88,8 @@ public class CaixaEletronico implements ICaixaEletronico{
 			
 			int valorRestante = valor;
 			
-					
 			JOptionPane.showMessageDialog(null, String.format("Processando saque de %d", valor));
-			
-			
+		
 		        // primeira regra
 		        if (valor <= 0) {
 		        	String resposta1 = "Erro: Valor de saque deve ser maior que zero.";
@@ -115,10 +100,7 @@ public class CaixaEletronico implements ICaixaEletronico{
 		        	String resposta2 = "Erro: Não existem notas para sacar valor de 1 ou tres reais";
 		            return resposta2;
 		        }
-	       
-		        
-		  
-        
+
 		int[] notasParaEntregar = new int[estoqueCedulas.length];
 		        
 		// O Loop que percorre as notas
@@ -155,12 +137,7 @@ public class CaixaEletronico implements ICaixaEletronico{
 		    notasParaEntregar[i] = qtdNotas;
 		    valorRestante -= (qtdNotas * valorNota);
 		}
-		
-		
-		
-		
-		
-		
+
 		// Validação final
         if (valorRestante == 0) {
         	StringBuilder mensagem = new StringBuilder("Saque realizado com sucesso!\n");
@@ -180,34 +157,23 @@ public class CaixaEletronico implements ICaixaEletronico{
         	JOptionPane.showMessageDialog(null, "Erro: O caixa não possui notas disponíveis para compor este valor exato.");
         }
         System.out.println("-----------------------------------");
-        
-        
-        
-        
+
         return "";
         
     }//fim sacar
 
-		
-		
-		
 		// Método para o relatório buscar esse valor
 	    public double getTotalSacado() {
 	        return totalSacadoNaSessao;
 	    }
-   
-		
+ 
 		public String armazenaCotaMinima(Integer minimo) {
 			String resposta = "Cota mínima definida para R$ " + minimo;
 			this.cotaMinima = minimo;
 			return resposta;
 		}
 		//logica de armazenar a cota minima para saque e criar um //mensagem(resposta)ao usuario
-		
-		
-		
-		
-		
+
 		public static void main(String arg[]){
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
